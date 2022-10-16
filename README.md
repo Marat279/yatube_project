@@ -1,2 +1,2 @@
-# yatube_project
-Соц. сеточка
+# *yatube_project*
+##_Соц. сеточка_
