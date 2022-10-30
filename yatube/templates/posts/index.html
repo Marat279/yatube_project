@@ -1,23 +1,25 @@
 <!-- templates/posts/index.html -->
 {% extends 'base.html' %}
+
 {% block title %}
-  Последние обновления на сайте
+  <title> Последние обновления на сайте</title>
 {% endblock %}
+
 {% block content %}
-  <h1>Последние обновления на сайте</h1>
-{% endblock %}
-{% block href1 %}
-  {% if post.group %}
-  <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-{% endif %}
-{% endblock %}
-{% block href2 %}
-  {% if post.group %}
-  <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-{% endif %}
-{% endblock %}
-{% block href3 %}
-  {% if post.group %}
-  <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-{% endif %}
+  {% for post in posts %}
+    <ul>
+      <li>
+        Автор: {{ post.author.get_full_name }}
+      </li>
+      <li>
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      </li>
+    </ul>
+    <p>{{ post.text }}</p>
+    {% if post.group %}
+      <a href="{% url 'posts:group_post' post.group.slug %}"
+      >все записи группы</a>
+    {% endif %}
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
 {% endblock %}
